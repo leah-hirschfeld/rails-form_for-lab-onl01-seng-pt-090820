@@ -9,14 +9,14 @@ class SchoolClassesController < ApplicationController
     end
 
     def new
-        @school_class = SchoolClass.all
+        @school_class = SchoolClass.new
     end
 
     def create
         @school_class = SchoolClass.new(post_params(:title, :room_number))
         @school_class.save
-        redirect_to schoolclass_path(@school_class)
-      end
+        redirect_to school_class_path(@school_class)
+    end
     
     def edit
         @school_class = SchoolClass.find(params[:id])
@@ -26,11 +26,11 @@ class SchoolClassesController < ApplicationController
         @school_class = SchoolClass.find(params[:id])
         @school_class.update(post_params(:title))
         @school_class.update(post_params(:room_number))
-        redirect_to schoolclass_path(@school_class)
+        redirect_to school_class_path(@school_class)
       end
 
     private
       def post_params(*args)
-        params.require(:schoolclass).permit(*args)
+        params.require(:school_class).permit(*args)
       end
 end
